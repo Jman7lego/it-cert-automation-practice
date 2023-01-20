@@ -1,24 +1,43 @@
-#!/usr/bin/env python3
+git clone https://github.com/jman7lego/it-cert-automation-practice.git
 
-import re
+cd ~/it-cert-automation-practice
+git remote -v
 
-def validate_user(username, minlen):
-    """Checks if the received username matches the required conditions."""
-    if type(username) != str:
-        raise TypeError("username must be a string")
-    if minlen < 1:
-        raise ValueError("minlen must be at least 1")
-    
-    # Usernames can't be shorter than minlen
-    if len(username) < minlen:
-        return False
-    # Usernames can only use letters, numbers, dots and underscores
-    if not re.match('^[a-z0-9._]*$', username):
-        return False
-    # Usernames can't begin with a number
-    if username[0].isnumeric():
-        return False
-    return True
+git remote add upstream https://github.com/jman7lego/it-cert-automation-practice.git
+
+git remote -v
+
+git config --global user.name "jman7lego"
+git config --global user.email "jgkummer@liberty.edu"
+
+git branch improve-username-behavior
+
+git checkout improve-username-behavior
+
+cd ~/it-cert-automation-practice/Course3/Lab4
+ls
+
+cat validations.py
+
+nano validations.py
+
+print(validate_user("blue.kale", 3)) # True
+print(validate_user(".blue.kale", 3)) # Currently True, should be False
+print(validate_user("red_quinoa", 4)) # True
+print(validate_user("_red_quinoa", 4)) # Currently True, should be False
+
+python3 validations.py
+
+nano validations.py
 
 
+git status
+git add validations.py
+git status
+git commit
 
+Closes: #1
+Updated validations.py python script.
+Fixed the behavior of validate_user function in validations.py.
+
+git push origin improve-username-behavior
